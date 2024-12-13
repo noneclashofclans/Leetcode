@@ -8,7 +8,6 @@ class Solution {
 
             if (nums[mid] == target){
                 return mid;
-        
             }else if (nums[lo] <= nums[mid]){
                 if (target >= nums[lo] && target <= nums[mid]){
                     hi = mid -1;
