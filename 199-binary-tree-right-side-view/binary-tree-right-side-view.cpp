@@ -1,27 +1,26 @@
 #include <vector>
 #include <queue>
-using namespace std; 
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> result;
-        if (!root) return result;
+        vector<int> ans;
+        if (!root) return ans;
 
         queue<TreeNode*> q;
-        q.push(root);
+        q.push(root); //push the root 1st inside the queue
 
-        while (!q.empty()) {
+        while (q.size() > 0){
             int levelSize = q.size();
-            for (int i = 0; i < levelSize; ++i) {
+            for (int i = 0; i < levelSize; i++){
                 TreeNode* node = q.front();
                 q.pop();
 
-                if (i == levelSize - 1) result.push_back(node->val);
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
+                if (i == levelSize -1) ans.push_back(node->val);
+                
+                if (node->left != NULL) q.push(node->left);
+                if (node->right != NULL) q.push(node->right);
             }
         }
-
-        return result;
+        return ans;
     }
 };
