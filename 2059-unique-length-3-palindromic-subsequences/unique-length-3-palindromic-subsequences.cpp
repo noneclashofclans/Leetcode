@@ -34,7 +34,9 @@ public:
                 //now verify the functionality of the middle charecters
                 for (char middle : middleChars){
                     string palindrome = string(1, ch) + middle + string(1, ch);
-                    uniquePalindromes.insert(palindrome);
+                    if(isPalindrome(palindrome)){
+                        uniquePalindromes.insert(palindrome);
+                    }    
                 }
             }
         }
