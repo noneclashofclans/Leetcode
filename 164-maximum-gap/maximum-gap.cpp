@@ -2,8 +2,8 @@ class Solution {
 public:
     int maximumGap(vector<int>& nums) {
         int n = nums.size();
-        int maxGap = 0;
-        if (n <= 1) return maxGap;
+        int maxGap = INT_MIN;
+        if (n <= 1) return 0;
 
         sort(nums.begin(),nums.end());
 
