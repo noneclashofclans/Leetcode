@@ -3,7 +3,6 @@ public:
     int thirdMax(vector<int>& nums) {
         //to return the third distinct max. number
         int n = nums.size();
-        unordered_map<int,int> freq;
 
         if (n <= 2) return *max_element(nums.begin(),nums.end());
 
