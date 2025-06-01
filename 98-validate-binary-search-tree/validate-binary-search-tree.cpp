@@ -1,15 +1,14 @@
 class Solution {
 public:
-    bool validate (TreeNode* root, long minVal, long maxVal){
+    bool helper(TreeNode* root, long long lo, long long hi){
         if (!root) return true;
-        if (root->val <= minVal || root->val >= maxVal){
-            return false;
-        }
-        return validate(root->left,minVal, root->val) and validate(root->right,root->val,maxVal);
+        if (root->val >= hi || root->val <= lo) return false;
+
+        return helper(root->left, lo, root->val) && helper(root->right, root->val, hi);
     }
     bool isValidBST(TreeNode* root) {
-        
+        if (!root) return false;
 
-        return validate(root,LONG_MIN,LONG_MAX);
+        return helper(root, LLONG_MIN, LLONG_MAX);
     }
 };
