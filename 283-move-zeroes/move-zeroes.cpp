@@ -8,6 +8,7 @@ public:
                 if(nums[j] == 0){
                     swap(nums[j], nums[j+1]);
                 }
+                else continue;
             }
         }   
     }
