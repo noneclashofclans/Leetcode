@@ -1,20 +1,20 @@
 class Solution {
 public:
-    int solve(vector<int>&nums){
-        int n = nums.size();
-        if (n == 1) return nums[0];
+    int solve(int i, int j, vector<int>&nums, vector<vector<int>>& dp){
+        if (i == 0) return nums[j];
 
-        vector<int> new_nums(n-1);
+        if (dp[i][j] != -1) return dp[i][j];
 
-        for (int i = 0; i < n-1; i++){
-            new_nums[i] = ((nums[i] + nums[i+1])%10);
-        }
+        int left = solve(i-1, j, nums, dp);
+        int right = solve(i-1, j+1, nums, dp);
 
-        return solve(new_nums);
+        return dp[i][j] = (left + right) % 10;
 
     }
-    
+
     int triangularSum(vector<int>& nums) {
-        return solve(nums);
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int> (n, -1));
+        return solve(n-1, 0, nums, dp);
     }
 };
