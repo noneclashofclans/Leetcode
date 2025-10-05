@@ -1,15 +1,20 @@
 class Solution {
 public:
-    int countways (vector<int> &nums, int idx, int target){
-        if (idx == nums.size()){
-            return target == 0 ? 1 : 0;
-        }
-        int add = countways (nums, idx + 1, target+nums[idx]);
-        int sub = countways(nums, idx + 1, target-nums[idx]);
+    int solve(vector<int>& nums, int target, int i){
+        int n = nums.size();
+        int count = 0;
 
-        return add + sub;
-    } 
+        if (i == n){
+            return (target == 0) ? 1 : 0;
+        } 
+        
+        count += solve(nums, target-nums[i], i+1);
+        count += solve(nums, target+nums[i], i+1);
+
+        return count;
+    }
     int findTargetSumWays(vector<int>& nums, int target) {
-       return countways(nums,0,target);
+       
+        return solve(nums, target, 0);
     }
 };
