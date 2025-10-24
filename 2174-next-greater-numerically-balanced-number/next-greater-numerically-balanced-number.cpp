@@ -1,6 +1,6 @@
 class Solution {
 public:
-    const int range = 1e8;
+    const int range = 1e7;
 
     bool satisfies(int n){
         map<int, int> freq;
