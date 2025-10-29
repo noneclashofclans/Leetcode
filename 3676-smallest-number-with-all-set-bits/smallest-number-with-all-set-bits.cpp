@@ -5,7 +5,7 @@ public:
     //     string res = "";
     //     while (x != 0){
     //         int rem = x % 2;
-    //         res += rem;
+    //         res += (rem + '0');
     //         x = x / 2;
     //     }
     //     reverse(res.begin(), res.end());
