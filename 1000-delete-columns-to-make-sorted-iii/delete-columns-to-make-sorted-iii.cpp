@@ -8,7 +8,7 @@ public:
         if (prev == -1) return true;
         for (int r = 0; r < n; r++) {
             if (s[r][prev] > s[r][cur])
-                return false;
+                return false; // not lexicographic
         }
         return true;
     }
