@@ -21,11 +21,26 @@ public:
         //     k--;
         // }
 
+        // for (int i = 0; i < k; i++){
+        //     sum += max (happiness[i] - t , 0);
+
+        //     t++;
+        // }
+        // return sum;
+
+        priority_queue<int> pq;
+
+        for (const auto &x : happiness){
+            pq.push(x);
+        }
+
         for (int i = 0; i < k; i++){
-            sum += max (happiness[i] - t , 0);
+            sum += max (pq.top() - t, 0);
+            pq.pop();
 
             t++;
         }
+
         return sum;
     }
 };
