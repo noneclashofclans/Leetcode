@@ -1,5 +1,4 @@
 class Solution {
-    const int mod = 1000000007;
 public:
     int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
         int n = commands.size();
