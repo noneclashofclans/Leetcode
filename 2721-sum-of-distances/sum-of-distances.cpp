@@ -1,37 +1,65 @@
 class Solution {
 public:
+    using ll = long long;
     vector<long long> distance(vector<int>& nums) {
+        
         int n = nums.size();
-    vector<long long> ans(n);
-    unordered_map<int, vector<int>> map;
+        
+        
+        vector<long long> ans(n);
+    
 
-    // Populate the map with indices for each number
-    for (int i = 0; i < n; i++) {
-        map[nums[i]].push_back(i);
-    }
+        // if there is no other index with the same value, then we need to 
+        // set that element to 0
+        // else we need to find the sum of the absolute value of their indices
 
-    // Compute results
-    for (const auto& [number, indices] : map) {
-        int m = indices.size();
-        vector<long long> prefixSum(m + 1, 0);
+        // for(int i = 0; i < n; i++){
+        //     bool found = false;
+        //     long long temp = 0;
+        //     for (int j = i+1; j < n; j++){
+        //         if (nums[i] == nums[j]){
+        //             found = true;
+        //             temp += abs(i - j);
+        //         }
+        //     }
 
-        // Compute prefix sums
-        for (int i = 0; i < m; i++) {
-            prefixSum[i + 1] = prefixSum[i] + indices[i];
+        //     for (int k = 0; k < i; k++){
+        //         if (nums[i] == nums[k]){
+        //             found = true;
+        //             temp += abs(i - k);
+        //         }
+        //     }
+            
+        //     ans[i] = (long long) temp;
+        // }
+
+        // return ans;
+
+
+        unordered_map<int, vector<int>> mapp;
+
+        for (int i = 0; i < n; i++){
+            mapp[nums[i]].push_back(i);
         }
 
-        // Calculate the result for each index
-        for (int i = 0; i < m; ++i) {
-            long long leftSum = prefixSum[i];
-            long long rightSum = prefixSum[m] - prefixSum[i + 1];
-            long long leftCount = i;
-            long long rightCount = m - i - 1;
+        for (const auto&[number, indices] : mapp){
+            int m = indices.size();
 
-            ans[indices[i]] = (rightSum - rightCount * 1LL * indices[i]) 
-                            + (leftCount * 1LL * indices[i] - leftSum);
+
+            vector<long long> prefSum(m+1, 0);
+            for(int i = 0; i < m; i++){
+                prefSum[i+1] = prefSum[i] + indices[i];
+            }
+
+            for (int i = 0; i < m; i++){
+                ll lftSum = prefSum[i];
+                ll rgtSum = prefSum[m] - prefSum[i+1];
+                ll leftC = i;
+                ll rgtC = m-i-1;
+
+                ans[indices[i]] = (rgtSum-rgtC*1LL*indices[i]) + (leftC*1LL*indices[i]-lftSum);
+            }
         }
-    }
-
-    return ans;
+        return ans;
     }
 };
