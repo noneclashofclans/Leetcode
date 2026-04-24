@@ -1,36 +1,31 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    int height(TreeNode* root){
-        if (!root) return true;
-
-        // int lh = 1 + height(root->left);
-        // int rh = 1 + height(root->right);
-
-        // int lh = 0, rh = 0;
-
-        // if (root->left){
-        //     lh++;
-        //     height(root->left);
-        // }
-        // else
-        //     height(root->right);
-        //     rh++;
-        // }
-
-        // return abs(lh - rh) <= 1;
-
-        int lh = height(root->left);
-        if (lh == -1) return -1;
-
-        int rh = height(root->right);
-        if (rh == -1) return -1;
-
-        if (abs(lh - rh) > 1) return -1;
-
-        return 1 + max(lh, rh);
+    int getHeight(TreeNode* root){
+        if (!root) return 0;
+        return 1 + max(getHeight(root->left), getHeight(root->right));
     }
     bool isBalanced(TreeNode* root) {
-        // left height == right height
-        return height(root) != -1;
+        if (!root) return true;
+
+        // balanced condition: leftheight - rightheight <= 1
+
+        int leftHeight = getHeight(root->left);
+        int rightHeight = getHeight(root->right);
+
+        int resHeight = abs(leftHeight - rightHeight);
+
+        if (resHeight > 1) return false;
+        return isBalanced(root->left) && isBalanced(root->right);
     }
 };
